@@ -1,2 +1,2 @@
 @import 'tailwindcss';
-@plugin '@tailwindcss/forms';
+@import 'animate.css/animate.min.css';
