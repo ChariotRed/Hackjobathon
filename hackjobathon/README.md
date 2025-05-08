@@ -15,19 +15,3 @@
 
 ### 4. Run the dev server
 - npm run dev
-
----
-
-
-## 🤝 Contributing
- - Pull requests and feature ideas are welcome!
-
- - Fork the repo
-
- - Create your branch: git checkout -b feature/feature-name
-
- - Commit your changes: git commit -m "feat: add feature"
-
- - Push to the branch: git push origin feature/feature-name
-
- - Submit a PR
