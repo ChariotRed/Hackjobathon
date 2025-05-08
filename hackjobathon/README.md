@@ -1,38 +1,70 @@
-# sv
+# 🎰 Stack Roulette
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+**Stack Roulette** is a gamified developer tool that generates random web development tech stacks — challenging developers to build projects using what they get. It supports user accounts, saved challenges, XP leveling, and social challenges.
 
-## Creating a project
+---
 
-If you're seeing this, you've probably already done this step. Congrats!
+## 🛠 Tech Stack
 
-```bash
-# create a new project in the current directory
-npx sv create
+| Layer        | Technology                      |
+|--------------|----------------------------------|
+| Frontend     | [SvelteKit](https://kit.svelte.dev) |
+| Styling      | [Tailwind CSS](https://tailwindcss.com) |
+| Backend/Auth | [Supabase](https://supabase.com) (PostgreSQL + Auth) |
+| Deployment   | [Vercel](https://vercel.com) / [Netlify](https://netlify.com) |
 
-# create a new project in my-app
-npx sv create my-app
-```
+---
 
-## Developing
+## ⚙️ Features
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+- 🎰 Random stack generation (frontend, backend, DB, styling, deployment)
+- ✅ Save and track your generated stack challenges
+- 🧠 Earn XP and level up as you complete challenges
+- 👫 Challenge your friends (social interaction planned)
+- 📊 View a leaderboard (planned)
 
-```bash
-npm run dev
+---
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## 🚀 Getting Started
 
-## Building
+### 1. Clone the repo
 
-To create a production version of your app:
+- git clone https://github.com/your-username/stack-roulette.git
+- cd stack-roulette
 
-```bash
-npm run build
-```
+### 2. install dependencies
+- npm install
 
-You can preview the production build with `npm run preview`.
+### 3. Set up environment variables
+- Create a .env file at the root with the following commands:
+- VITE_SUPABASE_URL=https://your-project.supabase.co
+- VITE_SUPABASE_ANON_KEY=your-anon-key
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+### 4. Run the dev server
+- npm run dev
+
+---
+
+ ## Planned Features
+ - Google login (OAuth)
+
+ - Shareable stack links
+
+ - Weekly challenge mode
+
+ - Leaderboards and badges
+
+---
+
+## 🤝 Contributing
+ - Pull requests and feature ideas are welcome!
+
+ - Fork the repo
+
+ - Create your branch: git checkout -b feature/feature-name
+
+ - Commit your changes: git commit -m "feat: add feature"
+
+ - Push to the branch: git push origin feature/feature-name
+
+ - Submit a PR
