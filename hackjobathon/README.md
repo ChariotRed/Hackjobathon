@@ -2,8 +2,8 @@
 
 ### 1. Clone the repo
 
-- git clone https://github.com/your-username/stack-roulette.git
-- cd stack-roulette
+- git clone https://github.com/your-username/hackjobathon.git
+- cd hackjobathon
 
 ### 2. install dependencies
 - npm install

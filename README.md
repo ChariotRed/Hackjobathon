@@ -1,6 +1,6 @@
-# 🎰 Stack Roulette
+# 🎰 Hackjobathon
 
-**Stack Roulette** is a gamified developer tool that generates random web development tech stacks — challenging developers to build projects using what they get. It supports user accounts, saved challenges, XP leveling, and social challenges.
+**Hackjobathon** is a gamified developer tool that generates random web development tech stacks — challenging developers to build projects using what they get. It supports user accounts, saved challenges, XP leveling, and social challenges.
 
 ---
 
