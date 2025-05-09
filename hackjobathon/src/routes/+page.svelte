@@ -37,15 +37,17 @@
       Welcome to the ultimate developer showdown, <strong> The Hack-Job-Athon</strong>!<br> You'll spin a randomized tech stack, build fast against the clock, and climb the leaderboard as you prove your skills under pressure. Good
     </p>
 
-      <button on:click={signInWithGitHub} class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition">
-        Sign in with GitHub
-      </button>
+      <div class="flex space-x-4">
+        <button on:click={signInWithGitHub} class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition">
+          Sign in with GitHub
+        </button>
 
-      <button
-        on:click={continueAsGuest}
-        class="bg-white hover:bg-gray-100 text-indigo-700 border border-indigo-400 font-semibold px-6 py-3 rounded-lg shadow transition" >
-        Continue as Guest
-      </button>
+        <button
+          on:click={continueAsGuest}
+          class="bg-white hover:bg-gray-100 text-indigo-700 border border-indigo-400 font-semibold px-6 py-3 rounded-lg shadow transition" >
+          Continue as Guest
+        </button>
+      </div>
     </div>
 
     <p class="text-sm text-gray-500 mt-6 max-w-md italic">
