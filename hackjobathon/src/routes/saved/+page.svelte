@@ -1,63 +1,61 @@
 <script>
-    import { supabase } from '$lib/supabaseClient';
     import { onMount } from 'svelte';
+    import { supabase } from '$lib/supabaseClient';
   
-    async function saveChallenge() {
-      const user = (await supabase.auth.getUser()).data.user;
+    let savedChallenges = [];
+    let loading = true;
+    let user = null;
+  
+    onMount(async () => {
+      const { data: authData } = await supabase.auth.getUser();
+      user = authData.user;
+  
       if (!user) {
-        alert("Please log in to save your challenge.");
+        loading = false;
         return;
       }
   
-      const { error } = await supabase
-        .from('stacks')
-        .insert([
-          {
-            user_id: user.id,
-            frontend: selected.frontend,
-            backend: selected.backend,
-            database: selected.database,
-            styling: selected.styling,
-            deploy: selected.deploy,
-            status: 'new'  // optionally defaulting to 'new' or 'pending'
-          }
-        ]);
+      const { data, error } = await supabase
+        .from('saved_challenges')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
   
       if (error) {
-        console.error('❌ Error saving stack:', error);
-        alert("There was an error saving your challenge.");
+        console.error("❌ Error fetching saved_challenges'):", error);
       } else {
-        alert("✅ Stack saved successfully!");
+        savedChallenges = data;
       }
-    }
-
-    let saved = [];
-
-  onMount(async () => {
-    const user = (await supabase.auth.getUser()).data.user;
-    if (!user) return;
-
-    const { data, error } = await supabase
-      .from('saved_challenges')
-      .select('*')
-      .eq('user_id', user.id)
-      .order('created_at', { ascending: false });
-
-    if (!error) saved = data;
-  });
-</script>
-
-<h2 class="text-center text-2xl font-bold mb-4">📚 Your Saved Challenges</h2>
-<ul class="space-y-2">
-  {#each saved as challenge}
-    <li class="border p-4 rounded">
-      <p><strong>Frontend:</strong> {challenge.frontend}</p>
-      <p><strong>Backend:</strong> {challenge.backend}</p>
-      <p><strong>Database:</strong> {challenge.database}</p>
-      <p><strong>Styling:</strong> {challenge.styling}</p>
-      <p><strong>Deploy:</strong> {challenge.deploy}</p>
-      <p class="text-xs text-gray-500">Saved: {new Date(challenge.created_at).toLocaleString()}</p>
-    </li>
-  {/each}
-</ul>
+  
+      loading = false;
+    });
+  </script>
+  
+  {#if loading}
+    <p class="text-center text-gray-500 mt-10">Loading saved challenges...</p>
+  {:else if !user}
+    <p class="text-center text-red-600 mt-10">You must be logged in to view saved challenges.</p>
+  {:else if savedChallenges.length === 0}
+    <p class="text-center text-gray-500 mt-10">You haven’t saved any challenges yet.</p>
+  {:else}
+    <div class="max-w-3xl mx-auto p-6">
+      <h2 class="text-2xl font-bold mb-4">📦 Your Saved Stack Challenges</h2>
+  
+      <ul class="space-y-4">
+        {#each savedChallenges as stack}
+          <li class="border p-4 rounded bg-white shadow hover:shadow-lg transition">
+            <div class="grid grid-cols-2 gap-2">
+              <p><strong>Frontend:</strong> {stack.frontend}</p>
+              <p><strong>Backend:</strong> {stack.backend}</p>
+              <p><strong>Database:</strong> {stack.database}</p>
+              <p><strong>Styling:</strong> {stack.styling}</p>
+              <p><strong>Deploy:</strong> {stack.deploy}</p>
+              <p><strong>Status:</strong> {stack.status}</p>
+            </div>
+            <p class="text-xs text-gray-500 mt-2">Saved: {new Date(stack.created_at).toLocaleString()}</p>
+          </li>
+        {/each}
+      </ul>
+    </div>
+  {/if}
   

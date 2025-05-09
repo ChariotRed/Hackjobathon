@@ -43,13 +43,23 @@
         Sign in with GitHub
       </button>
 
-      <button
-        on:click={continueAsGuest}
-        class="bg-white hover:bg-gray-100 text-indigo-700 border border-indigo-400 font-semibold px-6 py-3 rounded-lg shadow transition"
-      >
-        Continue as Guest
+      <script>
+        import { supabase } from '$lib/supabaseClient';
+      
+        const signInWithGitHub = async () => {
+          await supabase.auth.signInWithOAuth({
+            provider: 'github',
+            options: {
+              redirectTo: 'https://hackjobathon.vercel.app' // match callback
+            }
+          });
+        };
+      </script>
+      
+      <button on:click={signInWithGitHub} class="bg-black text-white px-4 py-2 rounded">
+        Sign in with GitHub
       </button>
-    </div>
+      
 
     <p class="text-sm text-gray-500 mt-6 max-w-md italic">
       You can always sign in later to save your progress and unlock achievements.
