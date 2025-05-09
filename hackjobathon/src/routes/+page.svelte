@@ -29,7 +29,7 @@
 
 <!-- Main landing content -->
   <div class="relative z-10 min-h-screen bg-gradient-to-br from-slate-100/50 to-blue-50/50 flex flex-col justify-center items-center text-center px-6 py-12">
-    <h1 class="text-5xl sm:text-6xl font-extrabold text-indigo-800 mb-4 tracking-tight">Test your wit!</h1>
+    <h1 class="text-5xl sm:text-6xl font-extrabold text-indigo-800 mb-4 tracking-tight">Test Test your wit!</h1>
 
     <p class="text-lg text-gray-700 max-w-2xl mb-8 leading-relaxed">
       Welcome to the ultimate developer showdown, <strong> The Hack-Job-Athon</strong>!<br> You'll spin a randomized tech stack, build fast against the clock, and climb the leaderboard as you prove your skills under pressure. Good
@@ -43,23 +43,13 @@
         Sign in with GitHub
       </button>
 
-      <script>
-        import { supabase } from '$lib/supabaseClient';
-      
-        const signInWithGitHub = async () => {
-          await supabase.auth.signInWithOAuth({
-            provider: 'github',
-            options: {
-              redirectTo: 'https://hackjobathon.vercel.app' // match callback
-            }
-          });
-        };
-      </script>
-      
-      <button on:click={signInWithGitHub} class="bg-black text-white px-4 py-2 rounded">
-        Sign in with GitHub
+      <button
+        on:click={continueAsGuest}
+        class="bg-white hover:bg-gray-100 text-indigo-700 border border-indigo-400 font-semibold px-6 py-3 rounded-lg shadow transition"
+      >
+        Continue as Guest
       </button>
-      
+    </div>
 
     <p class="text-sm text-gray-500 mt-6 max-w-md italic">
       You can always sign in later to save your progress and unlock achievements.
