@@ -40,8 +40,10 @@
     }
   
     getUser();
+
+
   </script>
-  
+  <a href="/saved" class="text-sm text-blue-600 hover:underline">Saved Challenges</a>
   <div class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-100 to-white px-4 py-10">
     <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 flex items-center gap-3 mb-12">
       🎰 <span>Stack Roulette</span>
@@ -71,13 +73,13 @@
         {spinning ? 'Spinning...' : 'Spin Stack'}
       </button>
   
-      {#if user && Object.keys(currentStack).length}
-        <button
-          class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold shadow transition"
-          on:click={saveChallenge}
-        >
-          Save Challenge
-        </button>
+      {#if Object.keys(currentStack).length}
+      <button
+      on:click={saveChallenge}
+      class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold shadow transition">
+      💾 Save Challenge
+    </button>
+    
       {/if}
     </div>
   </div>

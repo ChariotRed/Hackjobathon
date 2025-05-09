@@ -31,4 +31,31 @@
     });
   });
   </script>
+
+  <!-- header -->
+  <nav class="bg-dark shadow">
+    <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+      <h1 class="text-3xl font-bold text-black">🛠️Hack-job-athon</h1>
+      <ul class="flex space-x-4">
+        <li><a href="/" class="text-black hover:text-indigo-600">Home</a></li>
+        <li><a href="/" class="text-black hover:text-indigo-600">About</a></li>
+        <li><a href="https://chariotred.github.io/BarrettPortfolio/" class="text-black hover:text-indigo-600">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <slot />
+
+  <!-- Footer -->
+<footer class="bg-dark shadow mt-0">
+  <div class="max-w-7xl mx-auto px-4 py-6">
+    <p class="text-center text-gray-500 text-sm">
+      &copy; 2023 Hack-Job-Athon. All rights reserved.
+    </p>
+    <ul>
+      {#each data.countries as country}
+        <li>{country.name}</li>
+      {/each}
+    </ul>
+  </div>
+</footer>
