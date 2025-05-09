@@ -40,6 +40,7 @@
         <li><a href="/" class="text-black hover:text-indigo-600">Home</a></li>
         <li><a href="/" class="text-black hover:text-indigo-600">About</a></li>
         <li><a href="https://chariotred.github.io/BarrettPortfolio/" class="text-black hover:text-indigo-600">Contact</a></li>
+        <li><a href="/saved" class="text-black hover:text-indigo-600">Saved Challenges</a></li>
       </ul>
     </div>
   </nav>
@@ -50,7 +51,7 @@
 <footer class="bg-dark shadow mt-0">
   <div class="max-w-7xl mx-auto px-4 py-6">
     <p class="text-center text-gray-500 text-sm">
-      &copy; 2023 Hack-Job-Athon. All rights reserved.
+      &copy; 2025 Hackjobathon. All rights reserved.
     </p>
     <ul>
       {#each data.countries as country}

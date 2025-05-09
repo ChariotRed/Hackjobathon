@@ -43,7 +43,6 @@
 
 
   </script>
-  <a href="/saved" class="text-sm text-blue-600 hover:underline">Saved Challenges</a>
   <div class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-100 to-white px-4 py-10">
     <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 flex items-center gap-3 mb-12">
       🎰 <span>Stack Roulette</span>
