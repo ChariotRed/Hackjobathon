@@ -1,84 +1,93 @@
 <script>
-    import { categories } from '$lib/categories.js';
-    import { supabase } from '$lib/supabaseClient';
-  
-    let currentStack = {};
-    let spinning = false;
-    let user = null;
-  
-    async function getUser() {
-      const { data } = await supabase.auth.getUser();
-      user = data?.user;
+  import { supabase } from '$lib/supabaseClient';
+  import { goto } from '$app/navigation';
+
+  async function signInWithGithub() {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'github'
+    });
+    if (error) alert('Login failed: ' + error.message);
+  }
+
+  function continueAsGuest() {
+    sessionStorage.setItem('guest', 'true');
+    goto('/stack');
+  }
+
+  // List of rotating emojis
+  function getEmoji(index) {
+    const icons = ['⚙️', '🧠', '💻', '🚀', '🎯', '🧪', '📦', '🏆', '🕒', '🧰', '🧵', '🧱'];
+    return icons[index % icons.length];
+  }
+</script>
+
+<svelte:head>
+  <title>Hack-Job-Athon | Enter the Arena</title>
+</svelte:head>
+
+<style>
+  .orbit-ring {
+    position: absolute;
+    width: 100vmin;
+    height: 100vmin;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .orbit-ring span {
+    position: absolute;
+    font-size: 1.25rem;
+    animation: rotate 30s linear infinite;
+    transform-origin: center center;
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg) translateX(40vmin) rotate(0deg);
     }
-  
-    function getRandomItem(list) {
-      return list[Math.floor(Math.random() * list.length)];
+    to {
+      transform: rotate(360deg) translateX(40vmin) rotate(-360deg);
     }
-  
-    function spin() {
-      spinning = true;
-  
-      const interval = setInterval(() => {
-        for (let key in categories) {
-          currentStack[key] = getRandomItem(categories[key]);
-        }
-      }, 100);
-  
-      setTimeout(() => {
-        clearInterval(interval);
-        spinning = false;
-      }, 1500);
-    }
-  
-    async function saveChallenge() {
-      if (!user) return alert('Please log in!');
-      await supabase.from('stack_challenges').insert({
-        user_id: user.id,
-        ...currentStack,
-        status: 'started'
-      });
-    }
-  
-    getUser();
-  </script>
-  
-  <div class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-100 to-white px-4 py-10">
-    <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 flex items-center gap-3 mb-12">
-      🎰 <span>Stack Roulette</span>
-    </h1>
-  
-    <!-- SLOT REELS -->
-    <div class="space-y-4 w-full max-w-xs sm:max-w-sm">
-      {#each Object.keys(categories) as key}
-        <div
-          class="bg-white border-4 border-blue-200 shadow-lg rounded-lg p-4 text-center transition-all duration-300 animate__animated {spinning ? 'animate__flipInY' : ''}"
-        >
-          <div class="text-xs text-gray-500 tracking-widest uppercase">{key}</div>
-          <div class="text-2xl font-bold text-blue-600 mt-1">
-            {currentStack[key] || '—'}
-          </div>
-        </div>
-      {/each}
-    </div>
-  
-    <!-- BUTTONS -->
-    <div class="mt-10 flex gap-4">
-      <button
-        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold shadow transition"
-        on:click={spin}
-        disabled={spinning}
-      >
-        {spinning ? 'Spinning...' : 'Spin Stack'}
-      </button>
-  
-      {#if user && Object.keys(currentStack).length}
-        <button
-          class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold shadow transition"
-          on:click={saveChallenge}
-        >
-          Save Challenge
-        </button>
-      {/if}
-    </div>
+  }
+</style>
+
+<!-- Background animated dial -->
+<div class="orbit-ring">
+  {#each Array(12).fill(0) as _, i}
+    <span style="transform: rotate({i * 30}deg) translateX(40vmin) rotate(-{i * 30}deg)">
+      {getEmoji(i)}
+    </span>
+  {/each}
+</div>
+
+<!-- Main landing content -->
+<div class="relative z-10 min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 flex flex-col justify-center items-center text-center px-6 py-12">
+  <h1 class="text-5xl sm:text-6xl font-extrabold text-indigo-800 mb-4 tracking-tight">🛠️ Hack-Job-Athon</h1>
+
+  <p class="text-lg text-gray-700 max-w-2xl mb-8 leading-relaxed">
+    Welcome to the ultimate developer showdown. You'll spin a randomized tech stack, build fast against the clock, and climb the leaderboard as you prove your skills under pressure.
+  </p>
+
+  <div class="flex flex-col sm:flex-row gap-4">
+    <button
+      on:click={signInWithGithub}
+      class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition"
+    >
+      Sign in with GitHub
+    </button>
+
+    <button
+      on:click={continueAsGuest}
+      class="bg-white hover:bg-gray-100 text-indigo-700 border border-indigo-400 font-semibold px-6 py-3 rounded-lg shadow transition"
+    >
+      Continue as Guest
+    </button>
   </div>
-  
+
+  <p class="text-sm text-gray-500 mt-6 max-w-md italic">
+    You can always sign in later to save your progress and unlock achievements.
+  </p>
+</div>
