@@ -48,11 +48,12 @@
           Continue as Guest
         </button>
       </div>
+      <!-- <p class="text-sm text-gray-500 mt-6 max-w-md italic">
+        You can always sign in later to save your progress and unlock achievements.
+      </p> -->
     </div>
 
-    <p class="text-sm text-gray-500 mt-6 max-w-md italic">
-      You can always sign in later to save your progress and unlock achievements.
-    </p>
+    
 
 
 
